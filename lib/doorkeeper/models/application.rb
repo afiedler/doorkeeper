@@ -11,6 +11,8 @@ module Doorkeeper
 
     before_validation :generate_uid, :generate_secret, :on => :create
 
+    attr_accessible :name, :redirect_uri
+
     def self.model_name
       ActiveModel::Name.new(self, Doorkeeper, 'Application')
     end
