@@ -21,7 +21,9 @@ when :mongo_mapper
 end
 
 class User
-  attr_accessible :name, :password
+  if ::ActiveRecord::VERSION::MAJOR < 4 || ::ActiveRecord.constants.include?(:MassAssignmentSecurity)         
+    attr_accessible :name, :password
+  end
 
   def self.authenticate!(name, password)
     User.where(:name => name, :password => password).first
